@@ -1,0 +1,142 @@
+units:
+  kx: U
+  ky: U
+  px: kx + 1.5
+  py: ky + 1.5
+points:
+  zones:
+    main:
+      anchor:
+        shift: [100, -100]
+      key:
+        padding: px
+        spread: py
+      rows:
+        bottom:
+        middle:
+        top:
+      columns:
+        left:
+        pinkie:
+          key:
+            stagger: 0.25U
+            splay: -5
+        ring:
+          key:
+            stagger: 0.5U
+            splay: -4
+        middle:
+          key:
+            stagger: 0.45U
+            splay: -4
+        index:
+          key:
+            splay: -4
+        right:
+          key:
+            splay: -2
+    thumb:
+      key:
+        padding: px
+        spread: py
+      anchor:
+        ref: main_right_bottom
+        shift: [-0.15U,-2.2U]
+        rotate: -5
+      rows:
+        top:
+        bottom:
+      columns:
+        left:
+        center:
+          key:
+            splay: -5
+            stagger: -0.05U
+        right:
+          key:
+            splay: -5
+            stagger: -0.05U
+outlines:
+  board:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: main_left_top
+          shift: [-0.6px,0.55py]
+        - ref: main_middle_top
+          shift: [-0.5px,0.6py]
+        - ref: main_index_top
+          shift: [-0.6px,0.6py]
+        - ref: main_right_top
+          shift: [1.6px,0.6py]
+        - ref: thumb_right_bottom 
+          shift: [0.6px,0.5py]
+        - ref: thumb_right_top
+          shift: [0.6px,-0.6py]
+        - ref: thumb_center_top
+          shift: [0.5px,-0.6py]
+        - ref: thumb_center_top
+          shift: [-0.5px,-0.6py]
+        - ref: thumb_left_top
+          shift: [-0.6px,-0.6py]
+        - ref: main_left_bottom
+          shift: [-0.6px,-0.55py]
+      fillet: 3
+pcbs:
+  keyboard:
+    outlines:
+      main:
+        outline: board
+    footprints:
+      mx_hotswap:
+        what: switch_mx
+        where: true
+        params:
+          hotswap: true
+          reversible: true
+          include_keycap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode_tht_sod123
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0, -5]
+      nice_nano:
+        what: nice_nano
+        where:
+          ref: main_right_top
+          shift: [1.05py,-9]
+          rotate: -90
+      nice_view:
+        what: display_nice_view
+        where:
+          ref: main_right_top
+          shift: [1.05py,-9]
+      rotary_encoder:
+        what: rotary_encoder_ec11_ec12
+        where: 
+          ref: main_right_bottom
+          shift: [1.05py,0]
+      power_switch:
+        what: power_switch_smd_side
+        where: 
+          ref: main_right_top
+          shift: [34.7,0]
+          rotate: 18
+      reset_switch:
+        what: reset_switch_smd_side
+        where: 
+          ref: main_right_top
+          shift: [38,-11]
+          rotate: -72
+      battery:
+        what: battery_connector_jst_ph_2
+        where: 
+          ref: main_right_bottom
+          shift: [38,0]
+          rotate: 180
+      
