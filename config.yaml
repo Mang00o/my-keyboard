@@ -13,27 +13,40 @@ points:
         spread: py
       rows:
         bottom:
+          key:
+            row_net: P020
         middle:
+          key:
+            row_net: P017_
         top:
+          key:
+            row_net: P008
       columns:
         left:
-        pinkie:
           key:
+            column_net: P010
+        pinkie:   
+          key:
+            column_net: P111
             stagger: 0.25U
             splay: -5
         ring:
           key:
+            column_net: P113
             stagger: 0.5U
             splay: -4
-        middle:
+        middle:          
           key:
+            column_net: P115
             stagger: 0.45U
             splay: -4
         index:
           key:
+            column_net: P002
             splay: -4
-        right:
+        right:       
           key:
+            column_net: P029
             splay: -2
     thumb:
       key:
@@ -45,15 +58,23 @@ points:
         rotate: -5
       rows:
         top:
+          key:
+            row_net: P017
         bottom:
+          key:
+            row_net: P020
       columns:
         left:
+          key:
+            column_net: P006
         center:
           key:
+            column_net: P090
             splay: -5
             stagger: -0.05U
         right:
           key:
+            column_net: P022
             splay: -5
             stagger: -0.05U
 outlines:
