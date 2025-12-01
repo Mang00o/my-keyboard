@@ -1,166 +1,102 @@
 units:
-  kx: U
-  ky: U
-  px: kx + 1.5
-  py: ky + 1.5
+  u: U
+
 points:
   zones:
     main:
-      anchor:
-        shift: [100, -100]
       key:
-        padding: px
-        spread: py
+        padding: 1u
+        spread: 1u
       rows:
-        bottom:
-          key:
-            row_net: P020
-        middle:
-          key:
-            row_net: P029
-        top:
-          key:
-            row_net: P031
+        r0: { key: { row_net: R0 } }
+        r1: { key: { row_net: R1 } }
       columns:
-        left:
-          key:
-            column_net: P017
-        pinkie:   
-          key:
-            column_net: P020
-            stagger: 0.25U
-            splay: -5
-        ring:
-          key:
-            column_net: P022
-            stagger: 0.5U
-            splay: -4
-        middle:          
-          key:
-            column_net: P022
-            stagger: 0.45U
-            splay: -4
-        index:
-          key:
-            column_net: P100
-            splay: -4
-        right:       
-          key:
-            column_net: P011
-            splay: -2
+        c0: { key: { column_net: C0 } }
+        c1: { key: { column_net: C1 } }
+
     thumb:
-      key:
-        padding: px
-        spread: py
       anchor:
-        ref: main_right_bottom
-        shift: [-0.15U,-2.2U]
+        ref: main_c1_r1
+        shift: [1u, -1u]
         rotate: -5
+      key:
+        padding: 1u
+        spread: 1u
       rows:
-        top:
-          key:
-            row_net: P104
-        bottom:
-          key:
-            row_net: P106
+        t0: { key: { row_net: R2 } }
       columns:
-        left:
-          key:
-            column_net: P011
-        center:
-          key:
-            column_net: P104
-            splay: -5
-            stagger: -0.05U
-        right:
-          key:
-            column_net: P106
-            splay: -5
-            stagger: -0.05U
+        t0: { key: { column_net: C2 } }
+
 outlines:
   board:
     - what: polygon
-      operation: stack
       points:
-        - ref: main_left_top
-          shift: [-0.6px,0.55py]
-        - ref: main_middle_top
-          shift: [-0.5px,0.6py]
-        - ref: main_index_top
-          shift: [-0.6px,0.6py]
-        - ref: main_right_top
-          shift: [1.6px,0.6py]
-        - ref: thumb_right_bottom 
-          shift: [0.6px,0.5py]
-        - ref: thumb_right_top
-          shift: [0.6px,-0.6py]
-        - ref: thumb_center_top
-          shift: [0.5px,-0.6py]
-        - ref: thumb_center_top
-          shift: [-0.5px,-0.6py]
-        - ref: thumb_left_top
-          shift: [-0.6px,-0.6py]
-        - ref: main_left_bottom
-          shift: [-0.6px,-0.55py]
+        - ref: main_c0_r0; shift: [-0.7u, 0.7u]
+        - ref: main_c1_r0; shift: [ 0.7u, 0.7u]
+        - ref: thumb_t0_t0; shift: [ 0.7u,-0.7u]
+        - ref: main_c0_r1; shift: [-0.7u,-0.7u]
       fillet: 3
+
 pcbs:
-  keyboard:
+  test:
     outlines:
-      main:
-        outline: board
+      main: { outline: board }
     footprints:
-      mx_hotswap:
+
+      key:
         what: switch_mx
         where: true
         params:
           hotswap: true
           from: "{{column_net}}"
-          to: "{{colrow}}"
+          to:   "{{row_net}}"
+
       diode:
         what: diode_tht_sod123
         where: true
         params:
-          from: "{{colrow}}"
-          to: "{{row_net}}"
-        adjust:
-          shift: [0, -5]
+          from: "{{row_net}}"
+          to:   "{{column_net}}"
+        adjust: { shift: [0, -5] }
+
       nice_nano:
         what: nice_nano
         where:
-          ref: main_right_top
-          shift: [1.05py,-9]
+          ref: main_c1_r0
+          shift: [1.5u, 0]
           rotate: -90
+
       nice_view:
         what: display_nice_view
-        params: 
-          CS: P009
-          SCK: P010
+        params:
+          CS:   P009
+          SCK:  P010
           MOSI: P111
         where:
-          ref: main_right_top
-          shift: [1.05py,-9]
-      rotary_encoder:
+          ref: main_c1_r0
+          shift: [1.5u, -10]
+
+      rotary:
         what: rotary_encoder_ec11_ec12
-        where: 
-          ref: main_right_bottom
-          shift: [1.05py,0]
-      power_switch:
+        where:
+          ref: main_c1_r1
+          shift: [1.5u, 0]
+
+      power:
         what: power_switch_smd_side
-        where: 
-          ref: main_right_top
-          shift: [34.7,0]
-          rotate: 18
-      reset_switch:
+        where:
+          ref: main_c0_r0
+          shift: [-20, 0]
+
+      reset:
         what: reset_switch_smd_side
-        where: 
-          ref: main_right_top
-          shift: [38,-11]
-          rotate: -72
+        where:
+          ref: main_c0_r0
+          shift: [-20, -10]
+
       battery:
         what: battery_connector_jst_ph_2
-        params:
-          side: B
-        where: 
-          ref: main_right_bottom
-          shift: [38,0]
-          rotate: 180
+        params: { side: B }
+        where:
+          ref: main_c0_r1
+          shift: [-20, 0]
