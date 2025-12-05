@@ -4,6 +4,8 @@ units:
 points:
   zones:
     main:
+      anchor:
+        shift: [100, -100]
       key:
         padding: 1u
         spread: 1u
@@ -13,14 +15,14 @@ points:
             row_net: P21
         rowtop:
           key:
-            row_net: R1
+            row_net: P20
       columns:
         colleft:
           key:
-            column_net: C0
+            column_net: P18
         colright:
           key:
-            column_net: C1
+            column_net: P19
 
     thumb:
       anchor:
@@ -32,11 +34,11 @@ points:
       rows:
         t0:
           key:
-            row_net: R2
+            row_net: P15
       columns:
         t0:
           key:
-            column_net: C2
+            column_net: P14
 
 outlines:
   board:
