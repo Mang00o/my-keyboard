@@ -8,95 +8,75 @@ points:
         padding: 1u
         spread: 1u
       rows:
-        r0: { key: { row_net: R0 } }
-        r1: { key: { row_net: R1 } }
+        rowbottom:
+          key:
+            row_net: P21
+        rowtop:
+          key:
+            row_net: R1
       columns:
-        c0: { key: { column_net: C0 } }
-        c1: { key: { column_net: C1 } }
+        colleft:
+          key:
+            column_net: C0
+        colright:
+          key:
+            column_net: C1
 
     thumb:
       anchor:
-        ref: main_c1_r1
+        ref: main_colright_rowbottom
         shift: [1u, -1u]
-        rotate: -5
       key:
         padding: 1u
         spread: 1u
       rows:
-        t0: { key: { row_net: R2 } }
+        t0:
+          key:
+            row_net: R2
       columns:
-        t0: { key: { column_net: C2 } }
+        t0:
+          key:
+            column_net: C2
 
 outlines:
   board:
     - what: polygon
       points:
-        - ref: main_c0_r0; shift: [-0.7u, 0.7u]
-        - ref: main_c1_r0; shift: [ 0.7u, 0.7u]
-        - ref: thumb_t0_t0; shift: [ 0.7u,-0.7u]
-        - ref: main_c0_r1; shift: [-0.7u,-0.7u]
+        - ref: main_colleft_rowtop
+          shift: [-0.6u, 0.6u]
+        - ref: main_colright_rowtop
+          shift: [2u, 0.6u]
+        - ref: thumb_t0_t0
+          shift: [1u, -0.6u]
+        - ref: main_colleft_rowbottom
+          shift: [-0.6u, -1.6u]
       fillet: 3
 
 pcbs:
   test:
     outlines:
-      main: { outline: board }
+      main:
+        outline: board
     footprints:
-
+      nice_nano:
+        what: mcu_nice_nano
+        where:
+          ref: main_colright_rowtop
+          shift: [1.25u, -0.5u]
+        params:
+          reverse_mount: true
       key:
         what: switch_mx
         where: true
         params:
           hotswap: true
           from: "{{column_net}}"
-          to:   "{{row_net}}"
-
+          to: "{{row_net}}"
       diode:
         what: diode_tht_sod123
         where: true
         params:
           from: "{{row_net}}"
-          to:   "{{column_net}}"
-        adjust: { shift: [0, -5] }
-
-      nice_nano:
-        what: nice_nano
-        where:
-          ref: main_c1_r0
-          shift: [1.5u, 0]
-          rotate: -90
-
-      nice_view:
-        what: display_nice_view
-        params:
-          CS:   P009
-          SCK:  P010
-          MOSI: P111
-        where:
-          ref: main_c1_r0
-          shift: [1.5u, -10]
-
-      rotary:
-        what: rotary_encoder_ec11_ec12
-        where:
-          ref: main_c1_r1
-          shift: [1.5u, 0]
-
-      power:
-        what: power_switch_smd_side
-        where:
-          ref: main_c0_r0
-          shift: [-20, 0]
-
-      reset:
-        what: reset_switch_smd_side
-        where:
-          ref: main_c0_r0
-          shift: [-20, -10]
-
-      battery:
-        what: battery_connector_jst_ph_2
-        params: { side: B }
-        where:
-          ref: main_c0_r1
-          shift: [-20, 0]
+          to: "{{column_net}}"
+        adjust:
+          shift: [0, -5]
