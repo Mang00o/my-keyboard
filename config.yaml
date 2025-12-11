@@ -9,13 +9,6 @@ points:
       key:
         padding: 1u
         spread: 1u
-      rows:
-        rowbottom:
-          key:
-            row_net: P21
-        rowtop:
-          key:
-            row_net: P20
       columns:
         colleft:
           key:
@@ -23,6 +16,11 @@ points:
         colright:
           key:
             column_net: P19
+      rows:
+        rowbottom:
+          row_net: P21
+        rowtop:
+          row_net: P20
 
     thumb:
       anchor:
@@ -31,14 +29,13 @@ points:
       key:
         padding: 1u
         spread: 1u
-      rows:
-        t0:
-          key:
-            row_net: P15
       columns:
         t0:
           key:
             column_net: P14
+      rows:
+        t0:
+          row_net: P15
 
 outlines:
   board:
@@ -56,6 +53,7 @@ outlines:
 
 pcbs:
   test:
+    template: kicad8
     outlines:
       main:
         outline: board
@@ -66,19 +64,30 @@ pcbs:
           ref: main_colright_rowtop
           shift: [1.25u, -0.5u]
         params:
+          reversible: true
           reverse_mount: true
+          P18: P18
+          P19: P19
+          P20: P20
+          P21: P21
+          P14: P14
+          P15: P15
+      
       key:
         what: switch_mx
         where: true
         params:
           hotswap: true
-          from: "{{column_net}}"
-          to: "{{row_net}}"
+          reversible: true
+          from: "{{colrow}}"
+          to: "{{column_net}}"
+      
       diode:
         what: diode_tht_sod123
         where: true
         params:
-          from: "{{row_net}}"
-          to: "{{column_net}}"
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+          reversible: true
         adjust:
           shift: [0, -5]
