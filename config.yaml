@@ -144,6 +144,12 @@ pcbs:
         where: 
           ref: main_right_bottom
           shift: [1.05py,0]
+        params:
+          reversible: true
+          S1: P21
+          S2: P9
+          A: P15
+          C: P18
       power_switch:
         what: power_switch_smd_side
         where: 
