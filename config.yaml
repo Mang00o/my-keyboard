@@ -132,12 +132,13 @@ pcbs:
       nice_view:
         what: display_nice_view
         params: 
-          CS: P009
-          SCK: P010
-          MOSI: P111
+          CS: P10
+          SCK: P16
+          MOSI: P14
+          reversible: true
         where:
           ref: main_right_top
-          shift: [1.05py,-8]
+          shift: [1.05py,-9]
       rotary_encoder:
         what: rotary_encoder_ec11_ec12
         where: 
