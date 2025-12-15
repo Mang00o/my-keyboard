@@ -98,6 +98,41 @@ outlines:
         - ref: main_left_bottom
           shift: [-0.6px,-0.55py]
       fillet: 3
+  keys:
+    - what: polygon
+      operation: stack
+      points:
+        - ref: main_left_top
+          shift: [-0.6px,0.55py]
+        - ref: main_middle_top
+          shift: [-0.5px,0.6py]
+        - ref: main_index_top
+          shift: [-0.6px,0.6py]
+        - ref: main_right_top
+          shift: [0.6px,0.6py]
+        - ref: main_right_bottom
+          shift: [0.6px,-0.5py]
+        - ref: thumb_right_bottom 
+          shift: [0.6px,0.6py]
+        - ref: thumb_right_top
+          shift: [0.6px,-0.6py]
+        - ref: thumb_center_top
+          shift: [0.5px,-0.6py]
+        - ref: thumb_center_top
+          shift: [-0.5px,-0.6py]
+        - ref: thumb_left_top
+          shift: [-0.6px,-0.6py]
+        - ref: main_left_bottom
+          shift: [-0.6px,-0.55py]
+      fillet: 3
+  switch:
+    - where: true
+      what: rectangle
+      size: [14,14]
+  topmount:
+    - name: keys
+    - operation: subtract
+      name: switch
 pcbs:
   keyboard:
     outlines:
@@ -176,3 +211,10 @@ pcbs:
           ref: main_right_bottom
           shift: [38,0]
           rotate: 180
+cases:
+  top:
+    - name: topmount
+      extrude: 5
+  bottom:
+    - name: board
+      extrude: 1.2
