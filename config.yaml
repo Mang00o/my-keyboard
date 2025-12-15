@@ -158,7 +158,7 @@ pcbs:
           rotate: 18
         params:
           reversible: true
-          side: B
+          side: F
       reset_switch:
         what: reset_switch_smd_side
         where: 
@@ -167,7 +167,7 @@ pcbs:
           rotate: -72
         params:
           reversible: true
-          side: B
+          side: F
       battery:
         what: battery_connector_jst_ph_2
         params:
